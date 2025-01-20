@@ -1,6 +1,11 @@
 
 pipeline {
     agent any
+
+    tools {
+        maven 'Maven'
+    }
+    
     stages {
         stage("build") {
             steps {
@@ -9,7 +14,7 @@ pipeline {
         }
         stage("test") {
             steps {
-                echo 'Testing the application'
+                sh 'mvn -v'
             }
         }
         stage("deploy") {
