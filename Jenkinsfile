@@ -1,25 +1,13 @@
 
 pipeline {
-    agent any
-
-    tools {
-        maven 'Maven'
-    }
-    
+    agent none
     stages {
-        stage("build") {
+        stage("Build & Analyse") {
+            agent any
             steps {
-                echo 'Building the application'
-            }
-        }
-        stage("test") {
-            steps {
-                sh 'mvn -v'
-            }
-        }
-        stage("deploy") {
-            steps {
-                echo 'Deploying the application'
+                script {
+                    sh 'mvn clean package sonar:sonar'
+                }
             }
         }
     }
